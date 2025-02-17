@@ -47,4 +47,23 @@ return require("packer").startup(function(use)
     use { "hrsh7th/cmp-buffer" }                -- Buffer words completion
     use { "hrsh7th/cmp-path" }                  -- Path completion
     use { "L3MON4D3/LuaSnip" }                  -- Snippet engine
+
+    -- === Debugging Setups ===
+    use("mfussenegger/nvim-dap")
+    use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } })
+
+    -- === Neodev ===
+    use("folke/neodev.nvim")
+
+    -- === Git integration ===
+    use("lewis6991/gitsigns.nvim")
+    use("tpope/vim-fugitive")
+
+    -- === Mark Down Preview ===
+    use({
+        "iamcco/markdown-preview.nvim",
+        run = function()
+            vim.fn["mkdp#util#install"]()
+        end,
+    })
 end)

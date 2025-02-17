@@ -126,3 +126,85 @@ vim.api.nvim_create_autocmd("BufWritePre", {
         vim.lsp.buf.format({ async = false })
     end,
 })
+-- === Dap UI Configuration ===
+local dapui = require("dapui")
+
+-- === Dapui keymaps ===
+-- === Key mapping to open DAPUI ===
+vim.api.nvim_set_keymap("n", "<leader>du", '<cmd>lua require("dapui").toggle()<CR>', { noremap = true, silent = true })
+
+-- === Key mapping to set or toggle breakpoint ===
+vim.api.nvim_set_keymap(
+    "n",
+    "<leader>db",
+    '<cmd>lua require("dap").toggle_breakpoint()<CR>',
+    { noremap = true, silent = true }
+)
+
+-- === Debug operations ===
+-- === Key mapping to continue execution ===
+vim.api.nvim_set_keymap("n", "<leader>dc", '<cmd>lua require("dap").continue()<CR>', { noremap = true, silent = true })
+
+-- === Key mapping to step into ===
+vim.api.nvim_set_keymap("n", "<leader>di", '<cmd>lua require("dap").step_into()<CR>', { noremap = true, silent = true })
+
+-- === Key mapping to step over ===
+vim.api.nvim_set_keymap("n", "<leader>do", '<cmd>lua require("dap").step_over()<CR>', { noremap = true, silent = true })
+
+-- === Key mapping to step out ===
+vim.api.nvim_set_keymap("n", "<leader>ds", '<cmd>lua require("dap").step_out()<CR>', { noremap = true, silent = true })
+
+-- === Key mapping to restart the debug session ===
+vim.api.nvim_set_keymap(
+    "n",
+    "<leader>dr",
+    '<cmd>lua require("dap").repl.restart()<CR>',
+    { noremap = true, silent = true }
+)
+
+-- === Key mapping to close DAPUI ===
+vim.api.nvim_set_keymap("n", "<leader>dx", '<cmd>lua require("dapui").close()<CR>', { noremap = true, silent = true })
+
+-- === Key mapping to evaluate expression under the cursor ===
+vim.api.nvim_set_keymap(
+    "n",
+    "<leader>de",
+    '<cmd>lua require("dap.ui.variables").hover()<CR>',
+    { noremap = true, silent = true }
+)
+
+-- === Key mapping to evaluate selection ===
+vim.api.nvim_set_keymap(
+    "v",
+    "<leader>de",
+    '<cmd>lua require("dap.ui.variables").visual_hover()<CR>',
+    { noremap = true, silent = true }
+)
+
+-- === Dap configuration ===
+
+local dap = require("dap")
+local dapui = require("dapui")
+
+dapui.setup()
+dap.listeners.after.event_initialized["dapui_config"] = function()
+    dapui.open()
+end
+dap.listeners.before.event_terminated["dapui_config"] = function()
+    dapui.close()
+end
+dap.listeners.before.event_exited["dapui_config"] = function()
+    dapui.close()
+end
+
+-- === Neodev configuration ===
+require("neodev").setup({
+    library = { plugins = { "nvim-dap-ui" }, types = true },
+})
+
+-- === Git Configurations ===
+require("gitsigns").setup()
+
+-- === Keymap for gitsings ==
+vim.keymap.set("n", "<leader>h", ":Gitsigns preview_hunk<CR>", {})
+vim.keymap.set("n", "<leader>gt", ":Gitsigns toggle_current_line_blame<CR>", {})
