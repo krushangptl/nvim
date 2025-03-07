@@ -75,7 +75,7 @@ require("nvim-ts-autotag").setup({
 -- === Mason configuration ===
 require("mason").setup()
 require("mason-lspconfig").setup({
-    ensure_installed = { "lua_ls", "ruff", "ts_ls" }, -- Add LSPs you need
+    ensure_installed = { "lua_ls", "pyright", "ruff", "ts_ls", "clangd" }, -- Add LSPs you need
     automatic_installation = true,
 })
 
