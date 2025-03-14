@@ -15,6 +15,7 @@ return require("packer").startup(function(use)
 
     -- Color theme for fast coding
     use("rose-pine/neovim")
+    use("morhetz/gruvbox")
     -- Telescope file search and more
     use({
         "nvim-telescope/telescope.nvim",

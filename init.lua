@@ -4,7 +4,7 @@
 require("krushang")
 
 -- === color-theme ===
-vim.cmd.colorscheme("rose-pine")
+vim.cmd.colorscheme("gruvbox")
 
 -- === settings ===
 
