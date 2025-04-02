@@ -8,6 +8,9 @@ vim.g.mapleader = " "
 -- test leader
 vim.keymap.set("n", "<leader>ef", ":Ex<CR>", { desc = "Editor to NETRW" })
 
+-- undo tree
+vim.keymap.set('n', '<leader><F5>', vim.cmd.UndotreeToggle)
+
 -- === telescope keymaps ===
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "telescope find files" })
