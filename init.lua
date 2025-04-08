@@ -56,3 +56,7 @@ vim.cmd([[ hi Normal guibg=NONE ctermbg=NONE ]])
 vim.cmd([[ hi EndOfBuffer guibg=NONE ctermbg=NONE ]])
 vim.cmd([[ hi CursoreLine guibg=NONE ctermbg=NONE ]])
 vim.cmd([[ hi CursoreLineNr guibg=NONE ctermbg=NONE ]])
+
+-- === caps to esc ===
+vim.keymap.set("i", "<C-CapsLock>", "<Esc>", { noremap = true, silent = true })
+vim.keymap.set("v", "<C-CapsLock>", "<Esc>", { noremap = true, silent = true })
