@@ -9,7 +9,7 @@ vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>ef", ":Ex<CR>", { desc = "Editor to NETRW" })
 
 -- undo tree
-vim.keymap.set('n', '<leader><F5>', vim.cmd.UndotreeToggle)
+vim.keymap.set("n", "<leader><F5>", vim.cmd.UndotreeToggle)
 
 -- === telescope keymaps ===
 local builtin = require("telescope.builtin")
@@ -58,8 +58,8 @@ require("mini.statusline").setup()
 require("nvim-ts-autotag").setup({
     opts = {
         -- defaults
-        enable_close = true,           -- auto close tags
-        enable_rename = true,          -- auto rename pairs of tags
+        enable_close = true,     -- auto close tags
+        enable_rename = true,    -- auto rename pairs of tags
         enable_close_on_slash = false, -- auto close on trailing </
     },
     -- also override individual filetype configs, these take priority.
@@ -78,7 +78,7 @@ require("nvim-ts-autotag").setup({
 -- === Mason configuration ===
 require("mason").setup()
 require("mason-lspconfig").setup({
-    ensure_installed = { "lua_ls", "pyright", "ruff", "ts_ls", "clangd", "html" }, -- Add LSPs you need
+    ensure_installed = { "lua_ls", "pyright", "ruff", "ts_ls", "clangd", "html", "gopls" }, -- Add LSPs you need
     automatic_installation = true,
 })
 
@@ -88,7 +88,7 @@ local lspconfig = require("lspconfig")
 require("mason-lspconfig").setup_handlers({
     function(server_name) -- Default handler for all LSPs
         lspconfig[server_name].setup({})
-    end
+    end,
 })
 
 -- === cmp configuration ===
@@ -103,8 +103,8 @@ cmp.setup({
     sources = cmp.config.sources({
         { name = "nvim_lsp" },
         { name = "buffer" },
-        { name = "path" }
-    })
+        { name = "path" },
+    }),
 })
 
 -- === lsp keymaps ===
@@ -220,6 +220,6 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
-vim.keymap.set("n", "<leader>y", "\"+y")
-vim.keymap.set("v", "<leader>y", "\"+y")
-vim.keymap.set("n", "<leader>Y", "\"+Y")
+vim.keymap.set("n", "<leader>y", '"+y')
+vim.keymap.set("v", "<leader>y", '"+y')
+vim.keymap.set("n", "<leader>Y", '"+Y')
