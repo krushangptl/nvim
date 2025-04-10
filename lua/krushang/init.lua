@@ -129,6 +129,11 @@ vim.api.nvim_create_autocmd("BufWritePre", {
         vim.lsp.buf.format({ async = false })
     end,
 })
+
+vim.keymap.set("n", "<leader>f", function()
+    require("utils.formatters").format()
+end, { desc = "Format file externally" })
+
 -- === Dap UI Configuration ===
 local dapui = require("dapui")
 
