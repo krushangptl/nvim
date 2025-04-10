@@ -58,8 +58,8 @@ require("mini.statusline").setup()
 require("nvim-ts-autotag").setup({
     opts = {
         -- defaults
-        enable_close = true,     -- auto close tags
-        enable_rename = true,    -- auto rename pairs of tags
+        enable_close = true,           -- auto close tags
+        enable_rename = true,          -- auto rename pairs of tags
         enable_close_on_slash = false, -- auto close on trailing </
     },
     -- also override individual filetype configs, these take priority.
