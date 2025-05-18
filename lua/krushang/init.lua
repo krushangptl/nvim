@@ -77,19 +77,36 @@ require("nvim-ts-autotag").setup({
 
 -- === Mason configuration ===
 require("mason").setup()
-require("mason-lspconfig").setup({
-    ensure_installed = { "lua_ls", "pyright", "ruff", "ts_ls", "clangd", "html", "gopls" }, -- Add LSPs you need
-    automatic_installation = true,
-})
+-- require("mason-lspconfig").setup({
+--     ensure_installed = { "lua_ls", "pyright", "ruff", "ts_ls", "clangd", "html", "gopls" }, -- Add LSPs you need
+--     automatic_installation = true,
+-- })
 
 -- === LSP configuration ===
 local lspconfig = require("lspconfig")
 
-require("mason-lspconfig").setup_handlers({
-    function(server_name) -- Default handler for all LSPs
-        lspconfig[server_name].setup({})
-    end,
-})
+-- require("mason-lspconfig").setup_handlers({
+--     function(server_name) -- Default handler for all LSPs
+--         lspconfig[server_name].setup({})
+--     end,
+-- })
+
+-- Manual LSP Configuration
+
+-- c language
+lspconfig.clangd.setup({})
+
+-- typescript/javascript language
+lspconfig.ts_ls.setup({})
+
+-- go language
+lspconfig.gopls.setup({})
+
+-- python language
+lspconfig.pyright.setup({})
+
+-- lua languag
+lspconfig.lua_ls.setup({})
 
 -- === cmp configuration ===
 local cmp = require("cmp")
