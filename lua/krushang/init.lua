@@ -5,10 +5,10 @@ print("get fixed boi!")
 -- === leader key ===
 vim.g.mapleader = " "
 
--- test leader
+-- === test leader ===
 vim.keymap.set("n", "<leader>ef", ":Ex<CR>", { desc = "Editor to NETRW" })
 
--- undo tree
+-- === undo tree ===
 vim.keymap.set("n", "<leader><F5>", vim.cmd.UndotreeToggle)
 
 -- === telescope keymaps ===
@@ -58,8 +58,8 @@ require("mini.statusline").setup()
 require("nvim-ts-autotag").setup({
     opts = {
         -- defaults
-        enable_close = true,           -- auto close tags
-        enable_rename = true,          -- auto rename pairs of tags
+        enable_close = true,     -- auto close tags
+        enable_rename = true,    -- auto rename pairs of tags
         enable_close_on_slash = false, -- auto close on trailing </
     },
     -- also override individual filetype configs, these take priority.
@@ -77,21 +77,11 @@ require("nvim-ts-autotag").setup({
 
 -- === Mason configuration ===
 require("mason").setup()
--- require("mason-lspconfig").setup({
---     ensure_installed = { "lua_ls", "pyright", "ruff", "ts_ls", "clangd", "html", "gopls" }, -- Add LSPs you need
---     automatic_installation = true,
--- })
 
 -- === LSP configuration ===
 local lspconfig = require("lspconfig")
 
--- require("mason-lspconfig").setup_handlers({
---     function(server_name) -- Default handler for all LSPs
---         lspconfig[server_name].setup({})
---     end,
--- })
-
--- Manual LSP Configuration
+-- === Manual LSP Configuration ===
 
 -- c language
 lspconfig.clangd.setup({})
@@ -107,6 +97,9 @@ lspconfig.pyright.setup({})
 
 -- lua languag
 lspconfig.lua_ls.setup({})
+
+-- html and css language
+lspconfig.html.setup({})
 
 -- === cmp configuration ===
 local cmp = require("cmp")
@@ -241,3 +234,14 @@ vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("n", "<leader>y", '"+y')
 vim.keymap.set("v", "<leader>y", '"+y')
 vim.keymap.set("n", "<leader>Y", '"+Y')
+
+-- === None ls for Null ls config ===
+
+local null_ls = require("null-ls")
+
+null_ls.setup({
+    sources = {
+        null_ls.builtins.formatting.stylua,
+        null_ls.builtins.formatting.gofumpt,
+    },
+})

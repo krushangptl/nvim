@@ -10,65 +10,69 @@
 vim.cmd([[packadd packer.nvim]])
 
 return require("packer").startup(function(use)
-    -- Packer can manage itself
-    use("wbthomason/packer.nvim")
+	-- === Packer can manage itself ===
+	use("wbthomason/packer.nvim")
 
-    -- Color theme for fast coding
-    use("rose-pine/neovim")
-    use("morhetz/gruvbox")
-    -- Telescope file search and more
-    use({
-        "nvim-telescope/telescope.nvim",
-        tag = "0.1.8",
-        -- or                            , branch = '0.1.x',
-        requires = { { "nvim-lua/plenary.nvim" } },
-    })
+	-- === Color theme for fast coding ===
+	-- use("rose-pine/neovim")
+	use("rebelot/kanagawa.nvim")
 
-    -- Treesitter color variation
-    use("nvim-treesitter/nvim-treesitter")
+	-- === Telescope file search and more ===
+	use({
+		"nvim-telescope/telescope.nvim",
+		tag = "0.1.8",
+		-- or                            , branch = '0.1.x',
+		requires = { { "nvim-lua/plenary.nvim" } },
+	})
 
-    -- Which Key!
-    use("folke/which-key.nvim")
+	-- === Treesitter color variation ===
+	use("nvim-treesitter/nvim-treesitter")
 
-    -- Mini for good
-    use({
-        "echasnovski/mini.nvim",
-        version = false,
-    })
+	-- === Which Key! ===
+	use("folke/which-key.nvim")
 
-    use("windwp/nvim-ts-autotag")
-    -- use("lukas-reineke/indent-blankline.nvim")
+	-- === Mini for good ===
+	use({
+		"echasnovski/mini.nvim",
+		version = false,
+	})
 
-    -- === lsp configuration || snippet || lsp formatting ===
-    use({ "neovim/nvim-lspconfig" })             -- Core LSP functionality
-    use({ "williamboman/mason.nvim" })           -- LSP installer
-    use({ "williamboman/mason-lspconfig.nvim" }) -- Bridges mason & lspconfig
-    use({ "hrsh7th/nvim-cmp" })                  -- Autocompletion engine
-    use({ "hrsh7th/cmp-nvim-lsp" })              -- LSP completion source
-    use({ "hrsh7th/cmp-buffer" })                -- Buffer words completion
-    use({ "hrsh7th/cmp-path" })                  -- Path completion
-    use({ "L3MON4D3/LuaSnip" })                  -- Snippet engine
+	use("windwp/nvim-ts-autotag")
+	-- use("lukas-reineke/indent-blankline.nvim")
 
-    -- === Debugging Setups ===
-    use("mfussenegger/nvim-dap")
-    use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } })
+	-- === lsp configuration || snippet || lsp formatting ===
+	use({ "neovim/nvim-lspconfig" }) -- Core LSP functionality
+	use({ "williamboman/mason.nvim" }) -- LSP installer
+	use({ "williamboman/mason-lspconfig.nvim" }) -- Bridges mason & lspconfig
+	use({ "hrsh7th/nvim-cmp" }) -- Autocompletion engine
+	use({ "hrsh7th/cmp-nvim-lsp" }) -- LSP completion source
+	use({ "hrsh7th/cmp-buffer" }) -- Buffer words completion
+	use({ "hrsh7th/cmp-path" }) -- Path completion
+	use({ "L3MON4D3/LuaSnip" }) -- Snippet engine
 
-    -- === Neodev ===
-    use("folke/neodev.nvim")
+	-- === Debugging Setups ===
+	use("mfussenegger/nvim-dap")
+	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } })
 
-    -- === Git integration ===
-    use("lewis6991/gitsigns.nvim")
-    use("tpope/vim-fugitive")
+	-- === Neodev ===
+	use("folke/neodev.nvim")
 
-    -- === Undo Tree ===
-    -- Batter for git and more
-    use("mbbill/undotree")
+	-- === Git integration ===
+	use("lewis6991/gitsigns.nvim")
+	use("tpope/vim-fugitive")
 
-    -- === Mark Down Preview ===
-    use({
-        "iamcco/markdown-preview.nvim",
-        run = function()
-            vim.fn["mkdp#util#install"]()
-        end,
-    })
+	-- === Undo Tree ===
+	-- Batter for git and more
+	use("mbbill/undotree")
+
+	-- === Mark Down Preview ===
+	use({
+		"iamcco/markdown-preview.nvim",
+		run = function()
+			vim.fn["mkdp#util#install"]()
+		end,
+	})
+
+	-- === Null ls from None ls ===
+	use("nvimtools/none-ls.nvim")
 end)

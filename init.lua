@@ -4,7 +4,7 @@
 require("krushang")
 
 -- === color-theme ===
-vim.cmd.colorscheme("rose-pine")
+vim.cmd.colorscheme("kanagawa-dragon")
 
 -- === settings ===
 
@@ -41,7 +41,7 @@ vim.o.smartcase = true
 vim.opt.spelllang = "en"
 vim.opt.spell = true
 
--- I like the best arrangement
+-- structured way to arrange editor
 vim.opt.colorcolumn = "90"
 
 -- status line
@@ -56,7 +56,3 @@ vim.cmd([[ hi Normal guibg=NONE ctermbg=NONE ]])
 vim.cmd([[ hi EndOfBuffer guibg=NONE ctermbg=NONE ]])
 vim.cmd([[ hi CursoreLine guibg=NONE ctermbg=NONE ]])
 vim.cmd([[ hi CursoreLineNr guibg=NONE ctermbg=NONE ]])
-
--- === caps to esc ===
-vim.keymap.set("i", "<C-CapsLock>", "<Esc>", { noremap = true, silent = true })
-vim.keymap.set("v", "<C-CapsLock>", "<Esc>", { noremap = true, silent = true })
