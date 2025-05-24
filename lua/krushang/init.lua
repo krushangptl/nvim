@@ -20,28 +20,27 @@ vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "telescope help ta
 
 -- === treesitter configurations ===
 require("nvim-treesitter.configs").setup({
-    -- a list of parser names, or "all" (the five listed parsers should always be installed)
-    ensure_installed = { "c", "lua", "vim", "vimdoc", "query" },
+	-- a list of parser names, or "all" (the five listed parsers should always be installed)
+	ensure_installed = { "c", "lua", "vim", "vimdoc", "query" },
 
-    -- install parsers synchronously (only applied to `ensure_installed`)
-    sync_install = false,
+	-- install parsers synchronously (only applied to `ensure_installed`)
+	sync_install = false,
 
-    -- automatically install missing parsers when entering buffer
-    -- recommendation: set to false if you don't have `tree-sitter` cli installed locally
-    auto_install = true,
+	-- automatically install missing parsers when entering buffer
+	-- recommendation: set to false if you don't have `tree-sitter` cli installed locally
+	auto_install = true,
 
-    highlight = {
-        enable = true,
+	highlight = {
+		enable = true,
 
-        additional_vim_regex_highlighting = false,
-    },
+		additional_vim_regex_highlighting = false,
+	},
 })
 
 -- === which key configuration! ===
-
 require("which-key").setup({
-    -- keys = "<c-w>",
-    -- loop = true, -- this will keep the popup open until you hit <esc>
+	-- keys = "<c-w>",
+	-- loop = true, -- this will keep the popup open until you hit <esc>
 })
 
 -- === mini configurations ===
@@ -56,20 +55,20 @@ require("mini.statusline").setup()
 
 -- === tags configuration ===
 require("nvim-ts-autotag").setup({
-    opts = {
-        -- defaults
-        enable_close = true,     -- auto close tags
-        enable_rename = true,    -- auto rename pairs of tags
-        enable_close_on_slash = false, -- auto close on trailing </
-    },
-    -- also override individual filetype configs, these take priority.
-    -- empty by default, useful if one of the "opts" global settings
-    -- doesn't work well in a specific filetype
-    per_filetype = {
-        ["html"] = {
-            enable_close = true,
-        },
-    },
+	opts = {
+		-- defaults
+		enable_close = true, -- auto close tags
+		enable_rename = true, -- auto rename pairs of tags
+		enable_close_on_slash = false, -- auto close on trailing </
+	},
+	-- also override individual filetype configs, these take priority.
+	-- empty by default, useful if one of the "opts" global settings
+	-- doesn't work well in a specific filetype
+	per_filetype = {
+		["html"] = {
+			enable_close = true,
+		},
+	},
 })
 
 -- === indent blank line ===
@@ -101,43 +100,56 @@ lspconfig.lua_ls.setup({})
 -- html and css language
 lspconfig.html.setup({})
 
+lspconfig.tailwindcss.setup({})
+
 -- === cmp configuration ===
 local cmp = require("cmp")
 
 cmp.setup({
-    mapping = cmp.mapping.preset.insert({
-        ["<Tab>"] = cmp.mapping.select_next_item(),
-        ["<S-Tab>"] = cmp.mapping.select_prev_item(),
-        ["<CR>"] = cmp.mapping.confirm({ select = true }),
-    }),
-    sources = cmp.config.sources({
-        { name = "nvim_lsp" },
-        { name = "buffer" },
-        { name = "path" },
-    }),
+	mapping = cmp.mapping.preset.insert({
+		["<Tab>"] = cmp.mapping.select_next_item(),
+		["<S-Tab>"] = cmp.mapping.select_prev_item(),
+		["<CR>"] = cmp.mapping.confirm({ select = true }),
+	}),
+	sources = cmp.config.sources({
+		{ name = "nvim_lsp" },
+		{ name = "buffer" },
+		{ name = "path" },
+	}),
 })
 
 -- === lsp keymaps ===
 vim.api.nvim_create_autocmd("LspAttach", {
-    callback = function(ev)
-        local opts = { buffer = ev.buf }
+	callback = function(ev)
+		local opts = { buffer = ev.buf }
 
-        vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-        vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-        vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-        vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-        vim.keymap.set("n", "<leader>f", function()
-            vim.lsp.buf.format({ async = true })
-        end, opts)
-    end,
+		vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+		vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+		vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+		vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+		vim.keymap.set("n", "<leader>f", function()
+			vim.lsp.buf.format({ async = true })
+		end, opts)
+	end,
 })
 
 -- === lsp based formatting ===
 vim.api.nvim_create_autocmd("BufWritePre", {
-    pattern = "*",
-    callback = function()
-        vim.lsp.buf.format({ async = false })
-    end,
+	pattern = "*",
+	callback = function()
+		vim.lsp.buf.format({ async = false })
+	end,
+})
+
+-- === None ls for Null ls config ===
+
+local null_ls = require("null-ls")
+
+null_ls.setup({
+	sources = {
+		null_ls.builtins.formatting.stylua,
+		null_ls.builtins.formatting.gofumpt,
+	},
 })
 
 -- === Dap UI Configuration ===
@@ -149,10 +161,10 @@ vim.api.nvim_set_keymap("n", "<leader>du", '<cmd>lua require("dapui").toggle()<C
 
 -- === Key mapping to set or toggle breakpoint ===
 vim.api.nvim_set_keymap(
-    "n",
-    "<leader>db",
-    '<cmd>lua require("dap").toggle_breakpoint()<CR>',
-    { noremap = true, silent = true }
+	"n",
+	"<leader>db",
+	'<cmd>lua require("dap").toggle_breakpoint()<CR>',
+	{ noremap = true, silent = true }
 )
 
 -- === Debug operations ===
@@ -170,10 +182,10 @@ vim.api.nvim_set_keymap("n", "<leader>ds", '<cmd>lua require("dap").step_out()<C
 
 -- === Key mapping to restart the debug session ===
 vim.api.nvim_set_keymap(
-    "n",
-    "<leader>dr",
-    '<cmd>lua require("dap").repl.restart()<CR>',
-    { noremap = true, silent = true }
+	"n",
+	"<leader>dr",
+	'<cmd>lua require("dap").repl.restart()<CR>',
+	{ noremap = true, silent = true }
 )
 
 -- === Key mapping to close DAPUI ===
@@ -181,18 +193,18 @@ vim.api.nvim_set_keymap("n", "<leader>dx", '<cmd>lua require("dapui").close()<CR
 
 -- === Key mapping to evaluate expression under the cursor ===
 vim.api.nvim_set_keymap(
-    "n",
-    "<leader>de",
-    '<cmd>lua require("dap.ui.variables").hover()<CR>',
-    { noremap = true, silent = true }
+	"n",
+	"<leader>de",
+	'<cmd>lua require("dap.ui.variables").hover()<CR>',
+	{ noremap = true, silent = true }
 )
 
 -- === Key mapping to evaluate selection ===
 vim.api.nvim_set_keymap(
-    "v",
-    "<leader>de",
-    '<cmd>lua require("dap.ui.variables").visual_hover()<CR>',
-    { noremap = true, silent = true }
+	"v",
+	"<leader>de",
+	'<cmd>lua require("dap.ui.variables").visual_hover()<CR>',
+	{ noremap = true, silent = true }
 )
 
 -- === Dap configuration ===
@@ -202,18 +214,18 @@ local dapui = require("dapui")
 
 dapui.setup()
 dap.listeners.after.event_initialized["dapui_config"] = function()
-    dapui.open()
+	dapui.open()
 end
 dap.listeners.before.event_terminated["dapui_config"] = function()
-    dapui.close()
+	dapui.close()
 end
 dap.listeners.before.event_exited["dapui_config"] = function()
-    dapui.close()
+	dapui.close()
 end
 
 -- === Neodev configuration ===
 require("neodev").setup({
-    library = { plugins = { "nvim-dap-ui" }, types = true },
+	library = { plugins = { "nvim-dap-ui" }, types = true },
 })
 
 -- === Git Configurations ===
@@ -234,14 +246,3 @@ vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("n", "<leader>y", '"+y')
 vim.keymap.set("v", "<leader>y", '"+y')
 vim.keymap.set("n", "<leader>Y", '"+Y')
-
--- === None ls for Null ls config ===
-
-local null_ls = require("null-ls")
-
-null_ls.setup({
-    sources = {
-        null_ls.builtins.formatting.stylua,
-        null_ls.builtins.formatting.gofumpt,
-    },
-})

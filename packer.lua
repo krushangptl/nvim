@@ -50,6 +50,9 @@ return require("packer").startup(function(use)
 	use({ "hrsh7th/cmp-path" }) -- Path completion
 	use({ "L3MON4D3/LuaSnip" }) -- Snippet engine
 
+	-- === Null ls from None ls ===
+	use("nvimtools/none-ls.nvim")
+
 	-- === Debugging Setups ===
 	use("mfussenegger/nvim-dap")
 	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } })
@@ -72,7 +75,4 @@ return require("packer").startup(function(use)
 			vim.fn["mkdp#util#install"]()
 		end,
 	})
-
-	-- === Null ls from None ls ===
-	use("nvimtools/none-ls.nvim")
 end)
