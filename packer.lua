@@ -14,7 +14,7 @@ return require("packer").startup(function(use)
 	use("wbthomason/packer.nvim")
 
 	-- === Color theme for fast coding ===
-	-- use("rose-pine/neovim")
+	use("rose-pine/neovim")
 	use("rebelot/kanagawa.nvim")
 
 	-- === Telescope file search and more ===
