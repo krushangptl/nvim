@@ -8,7 +8,7 @@ vim.cmd.colorscheme("rose-pine")
 
 -- === settings ===
 
-vim.opt.guicursor = "" -- vim feel
+-- vim.opt.guicursor = "" -- vim feel
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.mouse = "a"
