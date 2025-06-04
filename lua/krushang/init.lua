@@ -1,27 +1,37 @@
--- === ~/.config/nvim/lua/krushang/init.lua ===
+print("Radhey Radhey")
 
-print("get fixed boi!")
-
--- === leader key ===
+-- leader key 
 vim.g.mapleader = " "
 
--- === test leader ===
+-- test leader 
 vim.keymap.set("n", "<leader>ef", ":Ex<CR>", { desc = "Editor to NETRW" })
 
--- === undo tree ===
+-- undo tree
 vim.keymap.set("n", "<leader><F5>", vim.cmd.UndotreeToggle)
 
--- === telescope keymaps ===
+-- telescope keymaps
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "telescope find files" })
 vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "telescope live grep" })
 vim.keymap.set("n", "<leader>sb", builtin.buffers, { desc = "telescope buffers" })
 vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "telescope help tags" })
 
--- === treesitter configurations ===
+-- blazing keymaps
+
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
+
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
+
+vim.keymap.set("n", "<leader>y", '"+y')
+vim.keymap.set("v", "<leader>y", '"+y')
+vim.keymap.set("n", "<leader>Y", '"+Y')
+
+-- treesitter
 require("nvim-treesitter.configs").setup({
     -- a list of parser names, or "all" (the five listed parsers should always be installed)
-    ensure_installed = { "c", "lua", "vim", "vimdoc", "query" },
+    ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "go", "javascript", "html", "css" },
 
     -- install parsers synchronously (only applied to `ensure_installed`)
     sync_install = false,
@@ -37,23 +47,7 @@ require("nvim-treesitter.configs").setup({
     },
 })
 
--- === which key configuration! ===
-require("which-key").setup({
-    -- keys = "<c-w>",
-    -- loop = true, -- this will keep the popup open until you hit <esc>
-})
-
--- === mini configurations ===
--- () {} [] , surround
-require("mini.surround").setup()
--- '' "", pairs
-require("mini.pairs").setup()
--- good comments
-require("mini.comment").setup()
--- status line
-require("mini.statusline").setup()
-
--- === tags configuration ===
+-- auto tag configuration 
 require("nvim-ts-autotag").setup({
     opts = {
         -- defaults
@@ -71,49 +65,31 @@ require("nvim-ts-autotag").setup({
     },
 })
 
--- === indent blank line ===
--- require("ibl").setup()
+-- git configuration
+require("gitsigns").setup()
 
--- === Mason configuration ===
+vim.keymap.set("n", "<leader>h", ":Gitsigns preview_hunk<CR>", {})
+vim.keymap.set("n", "<leader>gt", ":Gitsigns toggle_current_line_blame<CR>", {})
+
+-- Mason, Language server protocol, Snippets
+
 require("mason").setup()
 
--- === LSP configuration ===
 local lspconfig = require("lspconfig")
 
--- === Manual LSP Configuration ===
-
--- c language
-lspconfig.clangd.setup({})
-
--- typescript/javascript language
-lspconfig.ts_ls.setup({})
-
--- go language
-lspconfig.gopls.setup({})
-
--- python language
-lspconfig.pyright.setup({})
-
--- lua languag
+-- for lua language 
 lspconfig.lua_ls.setup({})
 
--- === cmp configuration ===
-local cmp = require("cmp")
+-- for python language
+lspconfig.pyright.setup({})
 
-cmp.setup({
-    mapping = cmp.mapping.preset.insert({
-        ["<Tab>"] = cmp.mapping.select_next_item(),
-        ["<S-Tab>"] = cmp.mapping.select_prev_item(),
-        ["<CR>"] = cmp.mapping.confirm({ select = true }),
-    }),
-    sources = cmp.config.sources({
-        { name = "nvim_lsp" },
-        { name = "buffer" },
-        { name = "path" },
-    }),
-})
+-- for c language 
+lspconfig.clangd.setup({})
 
--- === lsp keymaps ===
+-- for go language 
+lspconfig.gopls.setup({})
+
+-- lsp based keymaps
 vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(ev)
         local opts = { buffer = ev.buf }
@@ -128,123 +104,18 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end,
 })
 
--- === lsp based formatting ===
-vim.api.nvim_create_autocmd("BufWritePre", {
-    pattern = "*",
-    callback = function()
-        vim.lsp.buf.format({ async = false })
-    end,
+-- cmp config
+local cmp = require("cmp")
+
+cmp.setup({
+    mapping = cmp.mapping.preset.insert({
+        ["<Tab>"] = cmp.mapping.select_next_item(),
+        ["<S-Tab>"] = cmp.mapping.select_prev_item(),
+        ["<CR>"] = cmp.mapping.confirm({ select = true }),
+    }),
+    sources = cmp.config.sources({
+        { name = "nvim_lsp" },
+        { name = "buffer" },
+        { name = "path" },
+    }),
 })
-
--- === None ls for Null ls config ===
-
-local null_ls = require("null-ls")
-
-null_ls.setup({
-    sources = {
-        null_ls.builtins.formatting.stylua.with({
-            condition = function()
-                return vim.fn.executable("stylua") == 1
-            end,
-        }),
-        null_ls.builtins.formatting.gofumpt.with({
-            condition = function()
-                return vim.fn.executable("gofumpt") == 1
-            end,
-        }),
-    },
-})
--- === Dap UI Configuration ===
-local dapui = require("dapui")
-
--- === Dapui keymaps ===
--- === Key mapping to open DAPUI ===
-vim.api.nvim_set_keymap("n", "<leader>du", '<cmd>lua require("dapui").toggle()<CR>', { noremap = true, silent = true })
-
--- === Key mapping to set or toggle breakpoint ===
-vim.api.nvim_set_keymap(
-    "n",
-    "<leader>db",
-    '<cmd>lua require("dap").toggle_breakpoint()<CR>',
-    { noremap = true, silent = true }
-)
-
--- === Debug operations ===
--- === Key mapping to continue execution ===
-vim.api.nvim_set_keymap("n", "<leader>dc", '<cmd>lua require("dap").continue()<CR>', { noremap = true, silent = true })
-
--- === Key mapping to step into ===
-vim.api.nvim_set_keymap("n", "<leader>di", '<cmd>lua require("dap").step_into()<CR>', { noremap = true, silent = true })
-
--- === Key mapping to step over ===
-vim.api.nvim_set_keymap("n", "<leader>do", '<cmd>lua require("dap").step_over()<CR>', { noremap = true, silent = true })
-
--- === Key mapping to step out ===
-vim.api.nvim_set_keymap("n", "<leader>ds", '<cmd>lua require("dap").step_out()<CR>', { noremap = true, silent = true })
-
--- === Key mapping to restart the debug session ===
-vim.api.nvim_set_keymap(
-    "n",
-    "<leader>dr",
-    '<cmd>lua require("dap").repl.restart()<CR>',
-    { noremap = true, silent = true }
-)
-
--- === Key mapping to close DAPUI ===
-vim.api.nvim_set_keymap("n", "<leader>dx", '<cmd>lua require("dapui").close()<CR>', { noremap = true, silent = true })
-
--- === Key mapping to evaluate expression under the cursor ===
-vim.api.nvim_set_keymap(
-    "n",
-    "<leader>de",
-    '<cmd>lua require("dap.ui.variables").hover()<CR>',
-    { noremap = true, silent = true }
-)
-
--- === Key mapping to evaluate selection ===
-vim.api.nvim_set_keymap(
-    "v",
-    "<leader>de",
-    '<cmd>lua require("dap.ui.variables").visual_hover()<CR>',
-    { noremap = true, silent = true }
-)
-
--- === Dap configuration ===
-
-local dap = require("dap")
-local dapui = require("dapui")
-
-dapui.setup()
-dap.listeners.after.event_initialized["dapui_config"] = function()
-    dapui.open()
-end
-dap.listeners.before.event_terminated["dapui_config"] = function()
-    dapui.close()
-end
-dap.listeners.before.event_exited["dapui_config"] = function()
-    dapui.close()
-end
-
--- === Neodev configuration ===
-require("neodev").setup({
-    library = { plugins = { "nvim-dap-ui" }, types = true },
-})
-
--- === Git Configurations ===
-require("gitsigns").setup()
-
--- === Keymap for gitsings ==
-vim.keymap.set("n", "<leader>h", ":Gitsigns preview_hunk<CR>", {})
-vim.keymap.set("n", "<leader>gt", ":Gitsigns toggle_current_line_blame<CR>", {})
-
---- === BLAZING KEY-MAPS ===
-
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
-
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
-
-vim.keymap.set("n", "<leader>y", '"+y')
-vim.keymap.set("v", "<leader>y", '"+y')
-vim.keymap.set("n", "<leader>Y", '"+Y')

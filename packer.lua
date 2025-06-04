@@ -1,47 +1,53 @@
--- Installation of Pluginspack
+-- ~/.config/nvim/packer.lua 
 
-----------------------------------------------
--- Plugins Info
+-- Main Package Manager for Configurations
 
--- packer configuration and plugin itself
--- all that exist in ~/.config/nvim/lua/krushang/init.lua
-----------------------------------------------
+-- This file can be loaded by calling `lua require('plugins')` from your init.vim
 
-vim.cmd([[packadd packer.nvim]])
+-- Only required if you have packer configured as `opt`
+vim.cmd [[packadd packer.nvim]]
 
-return require("packer").startup(function(use)
-	-- === Packer can manage itself ===
-	use("wbthomason/packer.nvim")
+return require('packer').startup(function(use)
+  -- Packer can manage itself
+  use 'wbthomason/packer.nvim'
 
-	-- === Color theme for fast coding ===
-	use("rose-pine/neovim")
-	use("rebelot/kanagawa.nvim")
+  -- undo tree 
+  use("mbbill/undotree")
 
-	-- === Telescope file search and more ===
-	use({
-		"nvim-telescope/telescope.nvim",
-		tag = "0.1.8",
-		-- or                            , branch = '0.1.x',
-		requires = { { "nvim-lua/plenary.nvim" } },
-	})
+  -- Mark Down Preview
+  use({
+	  "iamcco/markdown-preview.nvim",
+	  run = function()
+		  vim.fn["mkdp#util#install"]()
+	  end,
+  })
 
-	-- === Treesitter color variation ===
-	use("nvim-treesitter/nvim-treesitter")
+  -- Telescope fole search and ...
+  use({
+	  "nvim-telescope/telescope.nvim",
+	  tag = "0.1.8",
+	  -- or                            , branch = '0.1.x',
+	  requires = { { "nvim-lua/plenary.nvim" } },
+  })
 
-	-- === Which Key! ===
-	use("folke/which-key.nvim")
+  -- color theme
+  use("zenbones-theme/zenbones.nvim")
+  use("rose-pine/neovim")
 
-	-- === Mini for good ===
-	use({
-		"echasnovski/mini.nvim",
-		version = false,
-	})
+  use("sainnhe/everforest")
+  use( "rktjmp/lush.nvim" )
+  -- treesitter 
+  use("nvim-treesitter/nvim-treesitter")
 
-	use("windwp/nvim-ts-autotag")
-	-- use("lukas-reineke/indent-blankline.nvim")
+  -- auto tags for web development
+  use("windwp/nvim-ts-autotag")
 
-	-- === lsp configuration || snippet || lsp formatting ===
-	use({ "neovim/nvim-lspconfig" }) -- Core LSP functionality
+  -- git integration 
+  use("lewis6991/gitsigns.nvim")
+  use("tpope/vim-fugitive")
+
+  -- Language Server Protocol, Mason, Snippets
+  	use({ "neovim/nvim-lspconfig" }) -- Core LSP functionality
 	use({ "williamboman/mason.nvim" }) -- LSP installer
 	use({ "williamboman/mason-lspconfig.nvim" }) -- Bridges mason & lspconfig
 	use({ "hrsh7th/nvim-cmp" }) -- Autocompletion engine
@@ -50,29 +56,4 @@ return require("packer").startup(function(use)
 	use({ "hrsh7th/cmp-path" }) -- Path completion
 	use({ "L3MON4D3/LuaSnip" }) -- Snippet engine
 
-	-- === Null ls from None ls ===
-	use("nvimtools/none-ls.nvim")
-
-	-- === Debugging Setups ===
-	use("mfussenegger/nvim-dap")
-	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } })
-
-	-- === Neodev ===
-	use("folke/neodev.nvim")
-
-	-- === Git integration ===
-	use("lewis6991/gitsigns.nvim")
-	use("tpope/vim-fugitive")
-
-	-- === Undo Tree ===
-	-- Batter for git and more
-	use("mbbill/undotree")
-
-	-- === Mark Down Preview ===
-	use({
-		"iamcco/markdown-preview.nvim",
-		run = function()
-			vim.fn["mkdp#util#install"]()
-		end,
-	})
 end)
