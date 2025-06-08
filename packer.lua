@@ -33,9 +33,9 @@ return require('packer').startup(function(use)
   -- color theme
   use("zenbones-theme/zenbones.nvim")
   use("rose-pine/neovim")
+  use("catppuccin/nvim")
+  use("AlexvZyl/nordic.nvim")
 
-  use("sainnhe/everforest")
-  use( "rktjmp/lush.nvim" )
   -- treesitter 
   use("nvim-treesitter/nvim-treesitter")
 
@@ -46,6 +46,12 @@ return require('packer').startup(function(use)
   use("lewis6991/gitsigns.nvim")
   use("tpope/vim-fugitive")
 
+  -- mini for goods
+  use({
+    "echasnovski/mini.nvim",
+    version = false,
+  })
+
   -- Language Server Protocol, Mason, Snippets
   	use({ "neovim/nvim-lspconfig" }) -- Core LSP functionality
 	use({ "williamboman/mason.nvim" }) -- LSP installer
@@ -55,5 +61,10 @@ return require('packer').startup(function(use)
 	use({ "hrsh7th/cmp-buffer" }) -- Buffer words completion
 	use({ "hrsh7th/cmp-path" }) -- Path completion
 	use({ "L3MON4D3/LuaSnip" }) -- Snippet engine
+
+    -- Debugging environment 
+    use("mfussenegger/nvim-dap")
+    use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } })
+    use("folke/neodev.nvim")
 
 end)

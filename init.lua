@@ -48,7 +48,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 })
 
 -- colorschemes 
-vim.cmd.colorscheme("minimal-eye")
+vim.cmd.colorscheme("nordic")
 
 -- structurrd way to arrange editor
 vim.opt.colorcolumn = "90"
