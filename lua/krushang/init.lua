@@ -1,22 +1,22 @@
 print("Radhey Radhey")
 
--- leader key 
+-- Leader key 
 vim.g.mapleader = " "
 
--- test leader 
+-- Test leader 
 vim.keymap.set("n", "<leader>ef", ":Ex<CR>", { desc = "Editor to NETRW" })
 
--- undo tree
+-- Undo tree
 vim.keymap.set("n", "<leader><F5>", vim.cmd.UndotreeToggle)
 
--- telescope keymaps
+-- Telescope keymaps
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "telescope find files" })
 vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "telescope live grep" })
 vim.keymap.set("n", "<leader>sb", builtin.buffers, { desc = "telescope buffers" })
 vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "telescope help tags" })
 
--- blazing keymaps
+-- Blazing keymaps
 
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
@@ -28,7 +28,7 @@ vim.keymap.set("n", "<leader>y", '"+y')
 vim.keymap.set("v", "<leader>y", '"+y')
 vim.keymap.set("n", "<leader>Y", '"+Y')
 
--- treesitter
+-- Treesitter
 require("nvim-treesitter.configs").setup({
     -- a list of parser names, or "all" (the five listed parsers should always be installed)
     ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "go", "javascript", "html", "css" },
@@ -47,7 +47,7 @@ require("nvim-treesitter.configs").setup({
     },
 })
 
--- auto tag configuration 
+-- Auto tag configuration 
 require("nvim-ts-autotag").setup({
     opts = {
         -- defaults
@@ -65,15 +65,15 @@ require("nvim-ts-autotag").setup({
     },
 })
 
--- git configuration
+-- Git configuration
 require("gitsigns").setup()
 
 vim.keymap.set("n", "<leader>h", ":Gitsigns preview_hunk<CR>", {})
 vim.keymap.set("n", "<leader>gt", ":Gitsigns toggle_current_line_blame<CR>", {})
 
--- mini configurations 
+-- Mini configurations 
+-- Statusline for goods
 require("mini.statusline").setup()
-require("mini.comment").setup()
 
 -- Mason, Language server protocol, Snippets
 
@@ -85,15 +85,15 @@ local lspconfig = require("lspconfig")
 lspconfig.lua_ls.setup({})
 
 -- for python language
-lspconfig.pyright.setup({})
+-- lspconfig.pyright.setup({})
 
 -- for c language 
-lspconfig.clangd.setup({})
+-- lspconfig.clangd.setup({})
 
 -- for go language 
-lspconfig.gopls.setup({})
+-- lspconfig.gopls.setup({})
 
--- lsp based keymaps
+-- Lsp based keymaps
 vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(ev)
         local opts = { buffer = ev.buf }
@@ -108,7 +108,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end,
 })
 
--- cmp config
+-- Cmp config
 local cmp = require("cmp")
 
 cmp.setup({
@@ -197,5 +197,3 @@ end
 require("neodev").setup({
     library = { plugins = { "nvim-dap-ui" }, types = true },
 })
-
-
