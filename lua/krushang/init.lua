@@ -85,13 +85,13 @@ local lspconfig = require("lspconfig")
 lspconfig.lua_ls.setup({})
 
 -- for python language
--- lspconfig.pyright.setup({})
+lspconfig.pyright.setup({})
 
 -- for c language 
--- lspconfig.clangd.setup({})
+lspconfig.clangd.setup({})
 
 -- for go language 
--- lspconfig.gopls.setup({})
+lspconfig.gopls.setup({})
 
 -- Lsp based keymaps
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -196,4 +196,16 @@ end
 -- Neodev configuration 
 require("neodev").setup({
     library = { plugins = { "nvim-dap-ui" }, types = true },
+})
+
+-- for Web Development 
+vim.api.nvim_create_autocmd("BufWritePost", {
+  pattern = { "*.js", "*.ts", "*.jsx", "*.tsx", "*.json", "*.css", "*.scss", "*.html", "*.md", "*.yml" },
+  callback = function()
+    vim.fn.jobstart({ "prettier", "--write", vim.fn.expand("%") }, {
+      on_stdout = function(_, data) if data then print(table.concat(data, "\n")) end end,
+      on_stderr = function(_, data) if data then print(table.concat(data, "\n")) end end,
+      on_exit = function() vim.cmd("edit!") end, -- reload the buffer
+    })
+  end,
 })
