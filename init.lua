@@ -1,3 +1,5 @@
+-- ~/.config/nvim/init.lua
+
 require("krushang")
 
 -- settings

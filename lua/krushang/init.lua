@@ -1,3 +1,5 @@
+-- ~/.config/nvim/lua/krushang/init.lua
+
 print("Radhey Radhey")
 
 -- Leader key 
@@ -108,6 +110,18 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end,
 })
 
+-- for Web Development 
+vim.api.nvim_create_autocmd("BufWritePost", {
+  pattern = { "*.js", "*.ts", "*.jsx", "*.tsx", "*.json", "*.css", "*.scss", "*.html", "*.md", "*.yml" },
+  callback = function()
+    vim.fn.jobstart({ "prettier", "--write", vim.fn.expand("%") }, {
+      on_stdout = function(_, data) if data then print(table.concat(data, "\n")) end end,
+      on_stderr = function(_, data) if data then print(table.concat(data, "\n")) end end,
+      on_exit = function() vim.cmd("edit!") end, -- reload the buffer
+    })
+  end,
+})
+
 -- Cmp config
 local cmp = require("cmp")
 
@@ -198,14 +212,3 @@ require("neodev").setup({
     library = { plugins = { "nvim-dap-ui" }, types = true },
 })
 
--- for Web Development 
-vim.api.nvim_create_autocmd("BufWritePost", {
-  pattern = { "*.js", "*.ts", "*.jsx", "*.tsx", "*.json", "*.css", "*.scss", "*.html", "*.md", "*.yml" },
-  callback = function()
-    vim.fn.jobstart({ "prettier", "--write", vim.fn.expand("%") }, {
-      on_stdout = function(_, data) if data then print(table.concat(data, "\n")) end end,
-      on_stderr = function(_, data) if data then print(table.concat(data, "\n")) end end,
-      on_exit = function() vim.cmd("edit!") end, -- reload the buffer
-    })
-  end,
-})
