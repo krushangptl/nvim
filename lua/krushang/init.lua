@@ -75,7 +75,7 @@ vim.keymap.set("n", "<leader>gt", ":Gitsigns toggle_current_line_blame<CR>", {})
 
 -- Mini configurations 
 -- Statusline for goods
-require("mini.statusline").setup()
+-- require("mini.statusline").setup()
 
 -- Mason, Language server protocol, Snippets
 
@@ -93,7 +93,13 @@ lspconfig.pyright.setup({})
 lspconfig.clangd.setup({})
 
 -- for go language 
-lspconfig.gopls.setup({})
+lspconfig.gopls.setup({
+    settings = {
+        gopls = {
+            gofumpt = true,
+        },
+    },
+})
 
 -- Lsp based keymaps
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -119,6 +125,28 @@ vim.api.nvim_create_autocmd("BufWritePost", {
       on_stderr = function(_, data) if data then print(table.concat(data, "\n")) end end,
       on_exit = function() vim.cmd("edit!") end, -- reload the buffer
     })
+  end,
+})
+
+-- go language, format by gofumpt
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*.go",
+  callback = function()
+    local gofumpt = vim.fn.exepath("gofumpt")
+    if vim.fn.executable(gofumpt) == 1 then
+      local bufnr = vim.api.nvim_get_current_buf()
+      local input = table.concat(vim.api.nvim_buf_get_lines(bufnr, 0, -1, false), "\n")
+      local output = vim.fn.systemlist(gofumpt, input)
+
+      if vim.v.shell_error == 0 then
+        vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, output)
+      else
+        vim.notify("gofumpt formatting failed:\n" .. table.concat(output, "\n"), vim.log.levels.ERROR)
+      end
+    else
+      vim.notify("gofumpt not found in PATH", vim.log.levels.ERROR)
+    end
   end,
 })
 
@@ -211,4 +239,3 @@ end
 require("neodev").setup({
     library = { plugins = { "nvim-dap-ui" }, types = true },
 })
-
