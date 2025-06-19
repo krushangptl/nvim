@@ -52,7 +52,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 })
 
 -- colorschemes 
-vim.cmd.colorscheme("rose-pine")
+vim.cmd.colorscheme("tokyonight-storm")
 
 -- structurrd way to arrange editor
 vim.opt.colorcolumn = "90"

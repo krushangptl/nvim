@@ -2,10 +2,10 @@
 
 print("Radhey Radhey")
 
--- Leader key 
+-- Leader key
 vim.g.mapleader = " "
 
--- Test leader 
+-- Test leader
 vim.keymap.set("n", "<leader>ef", ":Ex<CR>", { desc = "Editor to NETRW" })
 
 -- Undo tree
@@ -49,12 +49,12 @@ require("nvim-treesitter.configs").setup({
     },
 })
 
--- Auto tag configuration 
+-- Auto tag configuration
 require("nvim-ts-autotag").setup({
     opts = {
         -- defaults
-        enable_close = true,           -- auto close tags
-        enable_rename = true,          -- auto rename pairs of tags
+        enable_close = true,     -- auto close tags
+        enable_rename = true,    -- auto rename pairs of tags
         enable_close_on_slash = false, -- auto close on trailing </
     },
     -- also override individual filetype configs, these take priority.
@@ -73,7 +73,7 @@ require("gitsigns").setup()
 vim.keymap.set("n", "<leader>h", ":Gitsigns preview_hunk<CR>", {})
 vim.keymap.set("n", "<leader>gt", ":Gitsigns toggle_current_line_blame<CR>", {})
 
--- Mini configurations 
+-- Mini configurations
 -- Statusline for goods
 -- require("mini.statusline").setup()
 
@@ -83,17 +83,23 @@ require("mason").setup()
 
 local lspconfig = require("lspconfig")
 
--- for lua language 
+-- for lua language
 lspconfig.lua_ls.setup({})
 
 -- for python language
 lspconfig.pyright.setup({})
 
--- for c language 
+-- for c language
 lspconfig.clangd.setup({})
 
--- for go language 
-lspconfig.gopls.setup({})
+-- for go language
+lspconfig.gopls.setup({
+    settings = {
+        gopls = {
+            gofumpt = true,
+        },
+    },
+})
 
 -- Lsp based keymaps
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -110,16 +116,35 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end,
 })
 
--- for Web Development 
+-- null ls
+local null_ls = require("null-ls")
+
+null_ls.setup({
+    sources = {
+        null_ls.builtins.formatting.stylua,
+    },
+})
+
+-- for Web Development
 vim.api.nvim_create_autocmd("BufWritePost", {
-  pattern = { "*.js", "*.ts", "*.jsx", "*.tsx", "*.json", "*.css", "*.scss", "*.html", "*.md", "*.yml" },
-  callback = function()
-    vim.fn.jobstart({ "prettier", "--write", vim.fn.expand("%") }, {
-      on_stdout = function(_, data) if data then print(table.concat(data, "\n")) end end,
-      on_stderr = function(_, data) if data then print(table.concat(data, "\n")) end end,
-      on_exit = function() vim.cmd("edit!") end, -- reload the buffer
-    })
-  end,
+    pattern = { "*.js", "*.ts", "*.jsx", "*.tsx", "*.json", "*.css", "*.scss", "*.html", "*.md", "*.yml" },
+    callback = function()
+        vim.fn.jobstart({ "prettier", "--write", vim.fn.expand("%") }, {
+            on_stdout = function(_, data)
+                if data then
+                    print(table.concat(data, "\n"))
+                end
+            end,
+            on_stderr = function(_, data)
+                if data then
+                    print(table.concat(data, "\n"))
+                end
+            end,
+            on_exit = function()
+                vim.cmd("edit!")
+            end, -- reload the buffer
+        })
+    end,
 })
 
 -- Cmp config
@@ -138,7 +163,7 @@ cmp.setup({
     }),
 })
 
--- Debugging Environment 
+-- Debugging Environment
 local dapui = require("dapui")
 
 vim.api.nvim_set_keymap("n", "<leader>du", '<cmd>lua require("dapui").toggle()<CR>', { noremap = true, silent = true })
@@ -151,20 +176,20 @@ vim.api.nvim_set_keymap(
     { noremap = true, silent = true }
 )
 
--- Debug operations 
--- Key mapping to continue execution 
+-- Debug operations
+-- Key mapping to continue execution
 vim.api.nvim_set_keymap("n", "<leader>dc", '<cmd>lua require("dap").continue()<CR>', { noremap = true, silent = true })
 
--- Key mapping to step into 
+-- Key mapping to step into
 vim.api.nvim_set_keymap("n", "<leader>di", '<cmd>lua require("dap").step_into()<CR>', { noremap = true, silent = true })
 
--- Key mapping to step over 
+-- Key mapping to step over
 vim.api.nvim_set_keymap("n", "<leader>do", '<cmd>lua require("dap").step_over()<CR>', { noremap = true, silent = true })
 
--- Key mapping to step out 
+-- Key mapping to step out
 vim.api.nvim_set_keymap("n", "<leader>ds", '<cmd>lua require("dap").step_out()<CR>', { noremap = true, silent = true })
 
--- Key mapping to restart the debug session 
+-- Key mapping to restart the debug session
 vim.api.nvim_set_keymap(
     "n",
     "<leader>dr",
@@ -172,10 +197,10 @@ vim.api.nvim_set_keymap(
     { noremap = true, silent = true }
 )
 
--- Key mapping to close DAPUI 
+-- Key mapping to close DAPUI
 vim.api.nvim_set_keymap("n", "<leader>dx", '<cmd>lua require("dapui").close()<CR>', { noremap = true, silent = true })
 
--- Key mapping to evaluate expression under the cursor 
+-- Key mapping to evaluate expression under the cursor
 vim.api.nvim_set_keymap(
     "n",
     "<leader>de",
@@ -183,7 +208,7 @@ vim.api.nvim_set_keymap(
     { noremap = true, silent = true }
 )
 
--- Key mapping to evaluate selection 
+-- Key mapping to evaluate selection
 vim.api.nvim_set_keymap(
     "v",
     "<leader>de",
@@ -191,7 +216,7 @@ vim.api.nvim_set_keymap(
     { noremap = true, silent = true }
 )
 
--- Dap configuration 
+-- Dap configuration
 
 local dap = require("dap")
 local dapui = require("dapui")
@@ -207,7 +232,7 @@ dap.listeners.before.event_exited["dapui_config"] = function()
     dapui.close()
 end
 
--- Neodev configuration 
+-- Neodev configuration
 require("neodev").setup({
     library = { plugins = { "nvim-dap-ui" }, types = true },
 })
