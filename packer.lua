@@ -28,11 +28,10 @@ return require('packer').startup(function(use) -- Packer can manage itself use '
     })
 
     -- color theme
-    use("zenbones-theme/zenbones.nvim")
     use("rose-pine/neovim")
     use("catppuccin/nvim")
     use("AlexvZyl/nordic.nvim")
-    use("folke/tokyonight.nvim")
+   use("folke/tokyonight.nvim")
 
     -- treesitter
     use("nvim-treesitter/nvim-treesitter")

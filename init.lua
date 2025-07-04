@@ -4,7 +4,7 @@ require("krushang")
 
 -- settings
 
-vim.opt.guicursor = ""
+-- vim.opt.guicursor = ""
 
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -52,7 +52,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 })
 
 -- colorschemes 
-vim.cmd.colorscheme("tokyonight-storm")
+vim.cmd.colorscheme("rose-pine-moon")
 
 -- structurrd way to arrange editor
 vim.opt.colorcolumn = "90"

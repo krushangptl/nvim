@@ -75,7 +75,7 @@ vim.keymap.set("n", "<leader>gt", ":Gitsigns toggle_current_line_blame<CR>", {})
 
 -- Mini configurations
 -- Statusline for goods
--- require("mini.statusline").setup()
+require("mini.statusline").setup()
 
 -- Mason, Language server protocol, Snippets
 
