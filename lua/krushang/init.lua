@@ -101,6 +101,9 @@ lspconfig.gopls.setup({
     },
 })
 
+-- for html & css
+lspconfig.html.setup({})
+lspconfig.cssls.setup({})
 -- Lsp based keymaps
 vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(ev)
