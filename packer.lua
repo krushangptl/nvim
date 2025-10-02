@@ -1,5 +1,3 @@
--- ~/.config/nvim/packer.lua
-
 -- Main Package Manager for Configurations
 
 -- This file can be loaded by calling `lua require('plugins')` from your init.vim
@@ -10,6 +8,9 @@ vim.cmd [[packadd packer.nvim]]
 return require('packer').startup(function(use) -- Packer can manage itself use 'wbthomason/packer.nvim' undo tree use("mbbill/undotree")
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
+
+    -- color configs
+    use("savq/melange-nvim")
 
     -- Mark Down Preview
     use({
@@ -27,17 +28,18 @@ return require('packer').startup(function(use) -- Packer can manage itself use '
         requires = { { "nvim-lua/plenary.nvim" } },
     })
 
-    -- color theme
-    use("rose-pine/neovim")
-    use("catppuccin/nvim")
-    use("AlexvZyl/nordic.nvim")
-   use("folke/tokyonight.nvim")
-
     -- treesitter
     use("nvim-treesitter/nvim-treesitter")
+    use("nvim-treesitter/nvim-treesitter-textobjects")
+    use("nvim-treesitter/nvim-treesitter-context")
 
     -- auto tags for web development
     use("windwp/nvim-ts-autotag")
+    use("NvChad/nvim-colorizer.lua")
+    use({ "folke/which-key.nvim" })
+    use({ "roobert/tailwindcss-colorizer-cmp.nvim" })
+    use({ "luckasRanarison/tailwind-tools.nvim" })
+    use({ "mattn/emmet-vim" })
 
     -- git integration
     use("lewis6991/gitsigns.nvim")
@@ -50,18 +52,14 @@ return require('packer').startup(function(use) -- Packer can manage itself use '
     })
 
     -- Language Server Protocol, Mason, Snippets
-    use({ "neovim/nvim-lspconfig" })             -- Core LSP functionality
     use({ "williamboman/mason.nvim" })           -- LSP installer
-    use({ "williamboman/mason-lspconfig.nvim" }) -- Bridges mason & lspconfig
     use({ "hrsh7th/nvim-cmp" })                  -- Autocompletion engine
     use({ "hrsh7th/cmp-nvim-lsp" })              -- LSP completion source
     use({ "hrsh7th/cmp-buffer" })                -- Buffer words completion
     use({ "hrsh7th/cmp-path" })                  -- Path completion
+    use({ "saadparwaiz1/cmp_luasnip" })          -- Snippet source for cmp
     use({ "L3MON4D3/LuaSnip" })                  -- Snippet engine
-    use({ "nvimtools/none-ls.nvim" })            -- Formatting and Linting
+    use({ "rafamadriz/friendly-snippets" })      -- Snippet collection
+    use({ "nvimtools/none-ls.nvim" })            -- Formatting and Lintingend)
 
-    -- Debugging environment
-    use("mfussenegger/nvim-dap")
-    use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } })
-    use("folke/neodev.nvim")
 end)

@@ -1,10 +1,6 @@
--- ~/.config/nvim/init.lua
+-- config for speedrun ~HOPE
 
-require("krushang")
-
--- settings
-
--- vim.opt.guicursor = ""
+require("krushangptl")
 
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -37,6 +33,9 @@ vim.o.smartcase = true
 
 vim.opt.spelllang = "en"
 
+-- structurrd way to arrange editor
+vim.opt.colorcolumn = "90"
+
 -- Apply after setting colorscheme
 vim.api.nvim_create_autocmd("ColorScheme", {
   pattern = "*",
@@ -52,7 +51,5 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 })
 
 -- colorschemes 
-vim.cmd.colorscheme("rose-pine-moon")
-
--- structurrd way to arrange editor
-vim.opt.colorcolumn = "90"
+-- vim.cmd.colorscheme("lunaperche")
+vim.cmd.colorscheme("melange")
