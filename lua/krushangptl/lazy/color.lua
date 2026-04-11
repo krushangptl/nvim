@@ -38,7 +38,7 @@ return {
 			require("vague").setup({
 				-- optional configuration here
 			})
-			-- vim.cmd("colorscheme vague")
+			vim.cmd("colorscheme vague")
 		end,
 	},
 	{
@@ -52,7 +52,7 @@ return {
 		-- you can set set configuration options here
 		config = function()
 			vim.g.zenbones_darken_comments = 45
-			vim.cmd.colorscheme("zenbones")
+			-- vim.cmd.colorscheme("vimbones")
 		end,
 	},
 }

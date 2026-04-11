@@ -13,6 +13,9 @@ return {
 
 				-- Python
 				null_ls.builtins.formatting.black,
+
+				-- Prettier
+				null_ls.builtins.formatting.prettier,
 			},
 		})
 
