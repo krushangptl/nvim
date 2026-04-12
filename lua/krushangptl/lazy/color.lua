@@ -26,7 +26,7 @@ return {
 		--   config = bar
 		--   end,
 		config = function()
-			-- vim.cmd("colorscheme oxocarbon")
+			vim.cmd("colorscheme oxocarbon")
 		end,
 	},
 	{
@@ -38,7 +38,7 @@ return {
 			require("vague").setup({
 				-- optional configuration here
 			})
-			vim.cmd("colorscheme vague")
+			-- vim.cmd("colorscheme vague")
 		end,
 	},
 	{
@@ -53,6 +53,12 @@ return {
 		config = function()
 			vim.g.zenbones_darken_comments = 45
 			-- vim.cmd.colorscheme("vimbones")
+		end,
+	},
+	{
+		"savq/melange-nvim",
+		config = function()
+			vim.cmd.colorscheme("melange")
 		end,
 	},
 }
