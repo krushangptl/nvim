@@ -1,5 +1,19 @@
 return {
 	{
+		"catppuccin/nvim",
+		name = "catppuccin",
+		priority = 1000,
+		config = function()
+			-- vim.cmd.colorscheme("catppuccin-mocha")
+		end,
+	},
+	{
+		"https://codeberg.org/evergarden/nvim.git",
+		config = function()
+			-- vim.cmd.colorscheme("evergarden")
+		end,
+	},
+	{
 		"blazkowolf/gruber-darker.nvim",
 		priority = 1000,
 		config = function()
@@ -51,14 +65,15 @@ return {
 		priority = 1000,
 		-- you can set set configuration options here
 		config = function()
+			vim.g.zenbones_solid_line_nr = true
 			vim.g.zenbones_darken_comments = 45
-			-- vim.cmd.colorscheme("vimbones")
+			vim.cmd.colorscheme("zenbones")
 		end,
 	},
 	{
 		"savq/melange-nvim",
 		config = function()
-			vim.cmd.colorscheme("melange")
+			-- vim.cmd.colorscheme("melange")
 		end,
 	},
 }
