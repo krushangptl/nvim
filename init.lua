@@ -9,4 +9,3 @@ vim.cmd([[ hi NormalNC guibg=NONE ctermbg=NONE ]])
 vim.cmd([[ hi EndOfBuffer guibg=NONE ctermbg=NONE ]])
 vim.cmd([[ hi CursorLine guibg=NONE ctermbg=NONE ]])
 vim.cmd([[ hi CursorLineNr guibg=NONE ctermbg=NONE ]])
-
