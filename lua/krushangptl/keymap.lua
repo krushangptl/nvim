@@ -1,6 +1,9 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- use term in editor buddy
+vim.keymap.set("n", "<leader>t", ":sp | terminal<CR>", { noremap = true, silent = true })
+
 local map = function(mode, lhs, rhs, opts)
 	opts = opts or {}
 	opts.silent = opts.silent ~= false
