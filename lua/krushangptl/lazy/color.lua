@@ -10,7 +10,7 @@ return {
 	{
 		"https://codeberg.org/evergarden/nvim.git",
 		config = function()
-			-- vim.cmd.colorscheme("evergarden")
+			vim.cmd.colorscheme("evergarden")
 		end,
 	},
 	{
@@ -52,7 +52,7 @@ return {
 			require("vague").setup({
 				-- optional configuration here
 			})
-			vim.cmd("colorscheme vague")
+			-- vim.cmd("colorscheme vague")
 		end,
 	},
 	{
