@@ -10,7 +10,7 @@ return {
 	{
 		"https://codeberg.org/evergarden/nvim.git",
 		config = function()
-			vim.cmd.colorscheme("evergarden")
+			-- vim.cmd.colorscheme("evergarden")
 		end,
 	},
 	{
@@ -65,8 +65,8 @@ return {
 		priority = 1000,
 		-- you can set set configuration options here
 		config = function()
-			-- vim.g.zenbones_darken_comments = 45
-			-- vim.cmd.colorscheme("zenbones")
+			vim.g.zenbones_darken_comments = 45
+			vim.cmd.colorscheme("seoulbones")
 		end,
 	},
 	{
