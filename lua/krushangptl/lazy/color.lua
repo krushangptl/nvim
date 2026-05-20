@@ -24,7 +24,7 @@ return {
 		"rose-pine/neovim",
 		name = "rose-pine",
 		config = function()
-			-- vim.cmd("colorscheme rose-pine")
+			vim.cmd("colorscheme rose-pine")
 		end,
 	},
 	{
@@ -65,8 +65,8 @@ return {
 		priority = 1000,
 		-- you can set set configuration options here
 		config = function()
-			vim.g.zenbones_darken_comments = 45
-			vim.cmd.colorscheme("seoulbones")
+			-- vim.g.zenbones_darken_comments = 45
+			-- vim.cmd.colorscheme("seoulbones")
 		end,
 	},
 	{
