@@ -6,7 +6,7 @@ vim.opt.relativenumber = true
 vim.opt.guicursor = ""
 
 -- color column | sign column
-vim.opt.colorcolumn = "69"
+vim.opt.colorcolumn = "86"
 vim.opt.signcolumn = "yes"
 
 -- syntax | filetype indent
