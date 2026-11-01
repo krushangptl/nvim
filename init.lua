@@ -1,5 +1,7 @@
 require("krushangptl")
 
+-- just main change confirmation
+
 -- Just as it works
 -- background based on terminal
 vim.cmd([[ hi Normal guibg=NONE ctermbg=NONE ]])
